@@ -4,5 +4,18 @@
 </script>
 <div class="mermaid">
 flowchart TD
-A --> B
+    A[输入原始FASTQ数据] --> B[一级质控 (FASTQC)]
+    B --> C[输出每个样本的FastQC结果文件]
+    C --> D[二级质控 (比对与BAM统计)]
+    D --> E[输入BED文件 + 原始FASTQ数据]
+    E --> F[序列比对]
+    F --> G[格式转换与排序]
+    G --> H[标记重复]
+    H --> I[覆盖深度统计]
+    I --> J[输出比对结果 + 质控统计]
+    J --> K[三级质控模块（VCF级别）]
+    K --> L[输入BAM文件]
+    L --> M[GATK变异检测]
+    M --> N[Annovar突变注释]
+    N --> O[输出三级质控结果]
 </div>
